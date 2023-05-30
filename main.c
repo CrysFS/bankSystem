@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include "aluno.h"
+#include "bank.h"
 
 int main() {
     int i = 0;
