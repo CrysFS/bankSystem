@@ -17,28 +17,17 @@ void inserir(Conta* contas, int* totalContas) {
 
     printf("Digite o número da conta: ");
     fflush(stdin);
-    while (scanf("%d", &contas[*totalContas].numero != 1))
-    {
-        printf("Entrada inválida, digite um número:\n");
-        while (getchar() != '\n');
-    }
+    scanf("%d", &contas[*totalContas].numero);
     printf("Digite o nome do cliente: ");
     fflush(stdin);
     scanf(" %[^\n]s", contas[*totalContas].cliente);
     printf("Digite 1 se a conta é especial ou 0 se for normal: ");
     fflush(stdin);
-        while (scanf("%d", &contas[*totalContas].especial != 1))
-    {
-        printf("Entrada inválida, digite um número:\n");
-        while (getchar() != '\n');
-    }        
+    scanf("%d", &contas[*totalContas].especial);
     printf("Digite o saldo inicial da conta: ");
     fflush(stdin);
-    while (scanf("%f", &contas[*totalContas].saldo != 1))
-    {
-        printf("Entrada inválida, digite um número:\n");
-        while (getchar() != '\n');
-    }
+    scanf("%f", &contas[*totalContas].saldo);
+
     (*totalContas)++;
     printf("Conta inserida com sucesso!\n");
 }
@@ -47,11 +36,7 @@ void alterar(Conta* contas, int totalContas) {
     int numero;
     printf("Digite o número da conta a ser alterada: ");
     fflush(stdin);
-    while (scanf("%d", &numero != 1))
-    {
-        printf("Entrada inválida, digite um número:\n");
-        while (getchar() != '\n');
-    }
+    scanf("%d", &numero);
 
     int encontrou = 0;
     for (int i = 0; i < totalContas; i++) {
@@ -74,11 +59,7 @@ void procurar(Conta* contas, int totalContas) {
     int numero;
     printf("Digite o número da conta a ser procurada: ");
     fflush(stdin);
-    while (scanf("%d", &numero != 1))
-    {
-        printf("Entrada inválida, digite um número:\n");
-        while (getchar() != '\n');
-    }
+    scanf("%d", &numero);
 
     int encontrou = 0;
     for (int i = 0; i < totalContas; i++) {
@@ -113,11 +94,7 @@ void depositar(Conta* contas, int totalContas) {
     int numero;
     printf("Digite o número da conta para realizar o depósito: ");
     fflush(stdin);
-    while (scanf("%d", &numero != 1))
-    {
-        printf("Entrada inválida, digite um número:\n");
-        while (getchar() != '\n');
-    }
+    scanf("%d", &numero);
 
     int encontrou = 0;
     for (int i = 0; i < totalContas; i++) {
@@ -125,11 +102,8 @@ void depositar(Conta* contas, int totalContas) {
             float valor;
             printf("Digite o valor a ser depositado: ");
             fflush(stdin);
-            while (scanf("%f", &valor != 1))
-            {
-                printf("Entrada inválida, digite um número:\n");
-                while (getchar() != '\n');
-            }    
+            scanf("%f", &valor);
+
             contas[i].saldo += valor;
             printf("Depósito realizado com sucesso!\n");
             encontrou = 1;
@@ -146,11 +120,7 @@ void sacar(Conta* contas, int totalContas) {
     int numero;
     printf("Digite o número da conta para realizar o saque: ");
     fflush(stdin);
-    while (scanf("%d", &numero != 1))
-            {
-                printf("Entrada inválida, digite um número:\n");
-                while (getchar() != '\n');
-            }
+    scanf("%d", &numero);
     
     int encontrou = 0;
     for (int i = 0; i < totalContas; i++) {
@@ -158,11 +128,7 @@ void sacar(Conta* contas, int totalContas) {
             float valor;
             printf("Digite o valor a ser sacado: ");
             fflush(stdin);
-            while (scanf("%f", &valor != 1))
-            {
-                printf("Entrada inválida, digite um número:\n");
-                while (getchar() != '\n');
-            }
+            scanf("%f", &valor);
 
             if (valor > contas[i].saldo) {
                 printf("Saldo insuficiente.\n");
@@ -185,11 +151,8 @@ void imprimir(Conta* contas, int totalContas) {
     int numero;
     printf("Digite o número da conta a ser impressa: ");
     fflush(stdin);
-     while (scanf("%d", &numero != 1))
-            {
-                printf("Entrada inválida, digite um número:\n");
-                while (getchar() != '\n');
-            }    
+    scanf("%d", &numero);
+    
 
     int encontrou = 0;
     for (int i = 0; i < totalContas; i++) {
