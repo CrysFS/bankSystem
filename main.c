@@ -158,7 +158,11 @@ void sacar(Conta* contas, int totalContas) {
             float valor;
             printf("Digite o valor a ser sacado: ");
             fflush(stdin);
-            scanf("%f", &valor);
+            while (scanf("%f", &valor != 1))
+            {
+                printf("Entrada inválida, digite um número:\n");
+                while (getchar() != '\n');
+            }
 
             if (valor > contas[i].saldo) {
                 printf("Saldo insuficiente.\n");
@@ -181,8 +185,11 @@ void imprimir(Conta* contas, int totalContas) {
     int numero;
     printf("Digite o número da conta a ser impressa: ");
     fflush(stdin);
-    scanf("%d", &numero);
-    
+     while (scanf("%d", &numero != 1))
+            {
+                printf("Entrada inválida, digite um número:\n");
+                while (getchar() != '\n');
+            }    
 
     int encontrou = 0;
     for (int i = 0; i < totalContas; i++) {
