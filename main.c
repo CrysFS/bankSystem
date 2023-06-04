@@ -17,16 +17,27 @@ void inserir(Conta* contas, int* totalContas) {
 
     printf("Digite o número da conta: ");
     fflush(stdin);
-    scanf("%d", &contas[*totalContas].numero);
+    while (scanf("%d", &contas[*totalContas].numero) != 1) {
+        printf("Entrada inválida! Digite um número válido: ");
+        fflush(stdin);
+    }
+
     printf("Digite o nome do cliente: ");
     fflush(stdin);
     scanf(" %[^\n]s", contas[*totalContas].cliente);
     printf("Digite 1 se a conta é especial ou 0 se for normal: ");
     fflush(stdin);
-    scanf("%d", &contas[*totalContas].especial);
+    while (scanf("%d", &contas[*totalContas].especial) != 1 || (contas[*totalContas].especial != 0 && contas[*totalContas].especial != 1)) {
+        printf("Entrada inválida! Digite 0 para conta normal ou 1 para conta especial: ");
+        fflush(stdin);
+    }
+
     printf("Digite o saldo inicial da conta: ");
     fflush(stdin);
-    scanf("%f", &contas[*totalContas].saldo);
+    while (scanf("%f", &contas[*totalContas].saldo) != 1) {
+        printf("Entrada inválida! Digite um valor numérico válido: ");
+        fflush(stdin);
+    }
 
     (*totalContas)++;
     printf("Conta inserida com sucesso!\n");
@@ -36,7 +47,10 @@ void alterar(Conta* contas, int totalContas) {
     int numero;
     printf("Digite o número da conta a ser alterada: ");
     fflush(stdin);
-    scanf("%d", &numero);
+    while (scanf("%d", &numero) != 1) {
+        printf("Entrada inválida! Digite um número válido: ");
+        fflush(stdin);
+    }
 
     int encontrou = 0;
     for (int i = 0; i < totalContas; i++) {
@@ -59,7 +73,10 @@ void procurar(Conta* contas, int totalContas) {
     int numero;
     printf("Digite o número da conta a ser procurada: ");
     fflush(stdin);
-    scanf("%d", &numero);
+    while (scanf("%d", &numero) != 1) {
+        printf("Entrada inválida! Digite um número válido: ");
+        fflush(stdin);
+    }
 
     int encontrou = 0;
     for (int i = 0; i < totalContas; i++) {
@@ -67,8 +84,8 @@ void procurar(Conta* contas, int totalContas) {
             printf("Dados da conta:\n");
             printf("Número: %d\n", contas[i].numero);
             printf("Cliente: %s\n", contas[i].cliente);
-            printf("Especial: %s\n", contas[i].especial ? "1" : "0");
-            printf("Saldo: %.2f\n", contas[i].saldo);
+            printf("Especial: %s\n", contas[i].especial ? "Sim" : "Não");
+            printf("Saldo: R$ %.2f\n", contas[i].saldo);
             encontrou = 1;
             break;
         }
@@ -92,20 +109,27 @@ void listar(Conta* contas, int totalContas) {
 
 void depositar(Conta* contas, int totalContas) {
     int numero;
-    printf("Digite o número da conta para realizar o depósito: ");
+    float valor;
+    printf("Digite o número da conta: ");
     fflush(stdin);
-    scanf("%d", &numero);
+    while (scanf("%d", &numero) != 1) {
+        printf("Entrada inválida! Digite um número válido: ");
+        fflush(stdin);
+    }
 
     int encontrou = 0;
     for (int i = 0; i < totalContas; i++) {
         if (contas[i].numero == numero) {
-            float valor;
             printf("Digite o valor a ser depositado: ");
             fflush(stdin);
-            scanf("%f", &valor);
+            while (scanf("%f", &valor) != 1) {
+                printf("Entrada inválida! Digite um valor numérico válido: ");
+                fflush(stdin);
+            }
 
             contas[i].saldo += valor;
             printf("Depósito realizado com sucesso!\n");
+            printf("Novo saldo da conta: R$ %.2f\n", contas[i].saldo);
             encontrou = 1;
             break;
         }
@@ -118,23 +142,30 @@ void depositar(Conta* contas, int totalContas) {
 
 void sacar(Conta* contas, int totalContas) {
     int numero;
-    printf("Digite o número da conta para realizar o saque: ");
+    float valor;
+    printf("Digite o número da conta: ");
     fflush(stdin);
-    scanf("%d", &numero);
-    
+    while (scanf("%d", &numero) != 1) {
+        printf("Entrada inválida! Digite um número válido: ");
+        fflush(stdin);
+    }
+
     int encontrou = 0;
     for (int i = 0; i < totalContas; i++) {
         if (contas[i].numero == numero) {
-            float valor;
             printf("Digite o valor a ser sacado: ");
             fflush(stdin);
-            scanf("%f", &valor);
+            while (scanf("%f", &valor) != 1) {
+                printf("Entrada inválida! Digite um valor numérico válido: ");
+                fflush(stdin);
+            }
 
             if (valor > contas[i].saldo) {
                 printf("Saldo insuficiente.\n");
             } else {
                 contas[i].saldo -= valor;
                 printf("Saque realizado com sucesso!\n");
+                printf("Novo saldo da conta: R$ %.2f\n", contas[i].saldo);
             }
 
             encontrou = 1;
