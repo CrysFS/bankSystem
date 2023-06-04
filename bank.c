@@ -2,34 +2,35 @@
 #include <stdlib.h>
 #include "bank.h"
 
-struct Aluno {
-    int ra;
-    char nome[51];
+struct Client {
+    int numero;
+    char cliente[51];
+    int especial;
     char email[61];
-    double media;
+    float saldo;
 };
-ptr_aluno tabAlu[MAX];
+ptr_Client tabClient[MAX];
 
 void inicializar(){
     for (int i = 0; i < MAX; ++i) {
-        tabAlu[i] = NULL;
+        tabClient[i] = NULL;
     }
 }
 
 void cadastrar(int p){
-    tabAlu[p] = (ptr_aluno)malloc(sizeof(struct Aluno));
+    tabClient[p] = (ptr_Client)malloc(sizeof(struct Client));
     fflush(stdin);
     printf("Digite o RA do aluno: \n");
-    scanf("%d", &tabAlu[p]->ra);
+    scanf("%d", &tabClient[p]->numero);
     fflush(stdin);
-    printf("Digite o nome do aluno: \n");
-    gets(tabAlu[p]->nome);
+    printf("Digite o cliente do aluno: \n");
+    gets(tabClient[p]->cliente);
     fflush(stdin);
     printf("Digite o email do aluno: \n");
-    gets(tabAlu[p]->email);
+    gets(tabClient[p]->email);
     fflush(stdin);
-    printf("Digite a media do aluno: \n");
-    scanf("%lf", &tabAlu[p]->media);
+    printf("Digite a saldo do aluno: \n");
+    scanf("%f", &tabClient[p]->saldo);
     printf("Aluno cadastrado com sucesso\n");
 }
 
@@ -39,7 +40,7 @@ void procurar(int t){
     printf("Digite o RA do aluno procurado: \n");
     scanf("%d", &raProc);
     for (int i = 0; i < t; ++i) {
-        if(raProc == tabAlu[i]->ra){
+        if(raProc == tabClient[i]->numero){
             imprimir(i);
             return;
         }
@@ -48,10 +49,10 @@ void procurar(int t){
 }
 
 void imprimir(int p){
-    printf("Dados do aluno de RA: %d \n", tabAlu[p]->ra);
-    printf("Nome: %s \n", tabAlu[p]->nome);
-    printf("Email: %s \n", tabAlu[p]->email);
-    printf("Media: %.2lf \n", tabAlu[p]->media);
+    printf("Dados do aluno de RA: %d \n", tabClient[p]->numero);
+    printf("cliente: %s \n", tabClient[p]->cliente);
+    printf("Email: %s \n", tabClient[p]->email);
+    printf("Media: %.2f \n", tabClient[p]->saldo);
     printf("------------------------------------------\n");
 }
 
