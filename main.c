@@ -1,61 +1,177 @@
 #include <stdio.h>
 #include <stdlib.h>
-#define MAX 100
+#define MAX_CONTAS 100
 
-typedef struct Conta *ptr_conta;
-
-typedef struct Conta{
+typedef struct {
     int numero;
     char cliente[51];
     int especial;
     float saldo;
 } Conta;
 
-ptr_conta contas[MAX];
+void inserir(Conta* contas, int* totalContas) {
+    if (*totalContas >= MAX_CONTAS) {
+        printf("Limite de contas alcançado.\n");
+        return;
+    }
 
-void inicializar() {
-    for (int i = 0; i < MAX; ++i) {
-        contas[i] = NULL;
-}
+    printf("Digite o número da conta: ");
+    scanf("%d", &contas[*totalContas].numero);
+    printf("Digite o nome do cliente: ");
+    scanf(" %[^\n]s", contas[*totalContas].cliente);
+    printf("Digite 1 se a conta é especial ou 0 se for normal: ");
+    scanf("%d", &contas[*totalContas].especial);
+    printf("Digite o saldo inicial da conta: ");
+    scanf("%f", &contas[*totalContas].saldo);
 
-void inserir(Conta *contas, int *totalContas) {
     (*totalContas)++;
+    printf("Conta inserida com sucesso!\n");
 }
 
-void alterar(Conta *contas, int totalContas) {
+void alterar(Conta* contas, int totalContas) {
+    int numero;
+    printf("Digite o número da conta a ser alterada: ");
+    scanf("%d", &numero);
 
+    int encontrou = 0;
+    for (int i = 0; i < totalContas; i++) {
+        if (contas[i].numero == numero) {
+            printf("Digite o novo nome do cliente: ");
+            scanf(" %[^\n]s", contas[i].cliente);
+            printf("Dados da conta alterados com sucesso!\n");
+            encontrou = 1;
+            break;
+        }
+    }
+
+    if (!encontrou) {
+        printf("Conta não encontrada.\n");
+    }
 }
 
-void procurar(Conta *contas, int totalContas) {
+void procurar(Conta* contas, int totalContas) {
+    int numero;
+    printf("Digite o número da conta a ser procurada: ");
+    scanf("%d", &numero);
 
+    int encontrou = 0;
+    for (int i = 0; i < totalContas; i++) {
+        if (contas[i].numero == numero) {
+            printf("Dados da conta:\n");
+            printf("Número: %d\n", contas[i].numero);
+            printf("Cliente: %s\n", contas[i].cliente);
+            printf("Especial: %s\n", contas[i].especial ? "Sim" : "Não");
+            printf("Saldo: %.2f\n", contas[i].saldo);
+            encontrou = 1;
+            break;
+        }
+    }
+
+    if (!encontrou) {
+        printf("Conta não encontrada.\n");
+    }
 }
 
-void listar(Conta *contas, int totalContas) {
-
+void listar(Conta* contas, int totalContas) {
+    printf("Lista de contas:\n");
+    for (int i = 0; i < totalContas; i++) {
+        printf("Número: %d\n", contas[i].numero);
+        printf("Cliente: %s\n", contas[i].cliente);
+        printf("Especial: %s\n", contas[i].especial ? "Sim" : "Não");
+        printf("Saldo: %.2f\n", contas[i].saldo);
+        printf("---------\n");
+    }
 }
 
-void depositar(Conta *contas, int totalContas) {
+void depositar(Conta* contas, int totalContas) {
+    int numero;
+    printf("Digite o número da conta para realizar o depósito: ");
+    scanf("%d", &numero);
 
+    int encontrou = 0;
+    for (int i = 0; i < totalContas; i++) {
+        if (contas[i].numero == numero) {
+            float valor;
+            printf("Digite o valor a ser depositado: ");
+            scanf("%f", &valor);
+
+            contas[i].saldo += valor;
+            printf("Depósito realizado com sucesso!\n");
+            encontrou = 1;
+            break;
+        }
+    }
+
+    if (!encontrou) {
+        printf("Conta não encontrada.\n");
+    }
 }
 
-void sacar(Conta *contas, int totalContas) {
+void sacar(Conta* contas, int totalContas) {
+    int numero;
+    printf("Digite o número da conta para realizar o saque: ");
+    scanf("%d", &numero);
 
+    int encontrou = 0;
+    for (int i = 0; i < totalContas; i++) {
+        if (contas[i].numero == numero) {
+            float valor;
+            printf("Digite o valor a ser sacado: ");
+            scanf("%f", &valor);
+
+            if (valor > contas[i].saldo) {
+                printf("Saldo insuficiente.\n");
+            } else {
+                contas[i].saldo -= valor;
+                printf("Saque realizado com sucesso!\n");
+            }
+
+            encontrou = 1;
+            break;
+        }
+    }
+
+    if (!encontrou) {
+        printf("Conta não encontrada.\n");
+    }
 }
 
-void imprimir(Conta *contas, int totalContas) {
+void imprimir(Conta* contas, int totalContas) {
+    int numero;
+    printf("Digite o número da conta a ser impressa: ");
+    scanf("%d", &numero);
 
+    int encontrou = 0;
+    for (int i = 0; i < totalContas; i++) {
+        if (contas[i].numero == numero) {
+            printf("Dados da conta:\n");
+            printf("Número: %d\n", contas[i].numero);
+            printf("Cliente: %s\n", contas[i].cliente);
+            printf("Especial: %s\n", contas[i].especial ? "Sim" : "Não");
+            printf("Saldo: %.2f\n", contas[i].saldo);
+            encontrou = 1;
+            break;
+        }
+    }
+
+    if (!encontrou) {
+        printf("Conta não encontrada.\n");
+    }
 }
 
-void saldoGeral(Conta *contas, int totalContas) {
+void saldoGeral(Conta* contas, int totalContas) {
+    float saldoTotal = 0;
+    for (int i = 0; i < totalContas; i++) {
+        saldoTotal += contas[i].saldo;
+    }
 
+    printf("Saldo geral de todas as contas: %.2f\n", saldoTotal);
 }
 
 int main() {
-
+    Conta contas[MAX_CONTAS];
     int totalContas = 0;
     int opcao;
-
-    inicializar(contas);
 
     do {
         printf("\n----- Menu -----\n");
