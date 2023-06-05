@@ -15,12 +15,32 @@ void inserir(Conta* contas, int* totalContas) {
         return;
     }
 
+    int numeroConta;
     printf("Digite o número da conta: ");
     fflush(stdin);
-    while (scanf("%d", &contas[*totalContas].numero) != 1) {
+    while (scanf("%d", &numeroConta) != 1) {
         printf("Entrada inválida! Digite um número válido: ");
         fflush(stdin);
+        while (getchar() != '\n')
+            ;
     }
+
+    // Verificar se o número da conta já existe
+    for (int i = 0; i < *totalContas; i++) {
+        if (contas[i].numero == numeroConta) {
+            printf("Número de conta já existe. Digite outro número de conta: ");
+            fflush(stdin);
+            i = -1;  // Reiniciar a verificação a partir do início
+            while (scanf("%d", &numeroConta) != 1) {
+                printf("Entrada inválida! Digite um número válido: ");
+                fflush(stdin);
+                while (getchar() != '\n')
+                    ;
+            }
+        }
+    }
+
+    contas[*totalContas].numero = numeroConta;
 
     printf("Digite o nome do cliente: ");
     fflush(stdin);
@@ -30,6 +50,8 @@ void inserir(Conta* contas, int* totalContas) {
     while (scanf("%d", &contas[*totalContas].especial) != 1 || (contas[*totalContas].especial != 0 && contas[*totalContas].especial != 1)) {
         printf("Entrada inválida! Digite 0 para conta normal ou 1 para conta especial: ");
         fflush(stdin);
+        while (getchar() != '\n')
+            ;
     }
 
     printf("Digite o saldo inicial da conta: ");
@@ -37,6 +59,8 @@ void inserir(Conta* contas, int* totalContas) {
     while (scanf("%f", &contas[*totalContas].saldo) != 1) {
         printf("Entrada inválida! Digite um valor numérico válido: ");
         fflush(stdin);
+        while (getchar() != '\n')
+            ;
     }
 
     (*totalContas)++;
@@ -50,6 +74,8 @@ void alterar(Conta* contas, int totalContas) {
     while (scanf("%d", &numero) != 1) {
         printf("Entrada inválida! Digite um número válido: ");
         fflush(stdin);
+        while (getchar() != '\n')
+            ;
     }
 
     int encontrou = 0;
@@ -76,6 +102,8 @@ void procurar(Conta* contas, int totalContas) {
     while (scanf("%d", &numero) != 1) {
         printf("Entrada inválida! Digite um número válido: ");
         fflush(stdin);
+        while (getchar() != '\n')
+            ;
     }
 
     int encontrou = 0;
@@ -115,6 +143,8 @@ void depositar(Conta* contas, int totalContas) {
     while (scanf("%d", &numero) != 1) {
         printf("Entrada inválida! Digite um número válido: ");
         fflush(stdin);
+        while (getchar() != '\n')
+            ;
     }
 
     int encontrou = 0;
@@ -125,6 +155,8 @@ void depositar(Conta* contas, int totalContas) {
             while (scanf("%f", &valor) != 1) {
                 printf("Entrada inválida! Digite um valor numérico válido: ");
                 fflush(stdin);
+                while (getchar() != '\n')
+            ;
             }
 
             contas[i].saldo += valor;
@@ -148,6 +180,8 @@ void sacar(Conta* contas, int totalContas) {
     while (scanf("%d", &numero) != 1) {
         printf("Entrada inválida! Digite um número válido: ");
         fflush(stdin);
+        while (getchar() != '\n')
+            ;
     }
 
     int encontrou = 0;
@@ -158,6 +192,8 @@ void sacar(Conta* contas, int totalContas) {
             while (scanf("%f", &valor) != 1) {
                 printf("Entrada inválida! Digite um valor numérico válido: ");
                 fflush(stdin);
+                while (getchar() != '\n')
+            ;
             }
 
             if (valor > contas[i].saldo) {
@@ -180,10 +216,14 @@ void sacar(Conta* contas, int totalContas) {
 
 void imprimir(Conta* contas, int totalContas) {
     int numero;
-    printf("Digite o número da conta a ser impressa: ");
+    printf("Digite o número da conta: ");
     fflush(stdin);
-    scanf("%d", &numero);
-    
+    while (scanf("%d", &numero) != 1) {
+        printf("Entrada inválida! Digite um número válido: ");
+        fflush(stdin);
+        while (getchar() != '\n')
+            ;
+    }
 
     int encontrou = 0;
     for (int i = 0; i < totalContas; i++) {
