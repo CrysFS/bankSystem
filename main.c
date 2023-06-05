@@ -119,7 +119,7 @@ void procurar(Conta* contas, int totalContas) {
             printf("Dados da conta:\n");
             printf("Número: %d\n", contas[i].numero);
             printf("Cliente: %s\n", contas[i].cliente);
-            printf("Especial: %s\n", contas[i].especial ? "Sim" : "Não");
+            printf("Especial: %s\n", contas[i].especial ? "1" : "0");
             printf("Saldo: R$ %.2f\n", contas[i].saldo);
             encontrou = 1;
             break;
@@ -134,7 +134,7 @@ void procurar(Conta* contas, int totalContas) {
 void listar(Conta* contas, int totalContas) {
     printf("Lista de contas:\n");
     for (int i = 0; i < totalContas; i++) {
-        printf("Número: %d\n", contas[i].numero);
+        printf("\nNúmero: %d\n", contas[i].numero);
         printf("Cliente: %s\n", contas[i].cliente);
         printf("Especial: %s\n", contas[i].especial ? "1" : "0");
         printf("Saldo: %.2f\n", contas[i].saldo);
@@ -238,7 +238,7 @@ void imprimir(Conta* contas, int totalContas) {
             printf("Dados da conta:\n");
             printf("Número: %d\n", contas[i].numero);
             printf("Cliente: %s\n", contas[i].cliente);
-            printf("Especial: %s\n", contas[i].especial ? "Sim" : "Não");
+            printf("Especial: %s\n", contas[i].especial ? "1" : "0");
             printf("Saldo: %.2f\n", contas[i].saldo);
             encontrou = 1;
             break;
