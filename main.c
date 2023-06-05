@@ -1,3 +1,10 @@
+/*
+/CRYSTIAN EDUARDO FERRAZ SCHLEMPER
+/JOÃO ANTONIO COIMBRA NOVAES DETORE
+/JOÃO VITOR DA SILVEIRA EUGENIO
+/GIOVANI MURAKAMI LINO RODRIGUES
+*/
+
 #include <stdio.h>
 #include <stdlib.h>
 #define MAX_CONTAS 100
@@ -14,7 +21,7 @@ void inserir(Conta* contas, int* totalContas) {
         printf("Limite de contas alcançado.\n");
         return;
     }
-
+    // Pedir o numero da conta
     int numeroConta;
     printf("Digite o número da conta: ");
     fflush(stdin);
@@ -25,12 +32,12 @@ void inserir(Conta* contas, int* totalContas) {
             ;
     }
 
-    // Verificar se o número da conta já existe
+    // Verificar se o numero da conta ja existe
     for (int i = 0; i < *totalContas; i++) {
         if (contas[i].numero == numeroConta) {
             printf("Número de conta já existe. Digite outro número de conta: ");
             fflush(stdin);
-            i = -1;  // Reiniciar a verificação a partir do início
+            i = -1;  // Reinicio a verificação a partir do incio (começo de menos 1 para tb passar pelo primeiro
             while (scanf("%d", &numeroConta) != 1) {
                 printf("Entrada inválida! Digite um número válido: ");
                 fflush(stdin);
@@ -40,11 +47,11 @@ void inserir(Conta* contas, int* totalContas) {
         }
     }
 
-    contas[*totalContas].numero = numeroConta;
+    contas[*totalContas].numero = numeroConta; // Apos validar, define a variavel
 
     printf("Digite o nome do cliente: ");
     fflush(stdin);
-    scanf(" %[^\n]s", contas[*totalContas].cliente);
+    scanf(" %[^\n]s", contas[*totalContas].cliente); // [^\n]s é um metodo para aceitar char de todo tipo que contenhas espaços rs (chat gpt que me contou essa)
     printf("Digite 1 se a conta é especial ou 0 se for normal: ");
     fflush(stdin);
     while (scanf("%d", &contas[*totalContas].especial) != 1 || (contas[*totalContas].especial != 0 && contas[*totalContas].especial != 1)) {
@@ -63,7 +70,7 @@ void inserir(Conta* contas, int* totalContas) {
             ;
     }
 
-    (*totalContas)++;
+    (*totalContas)++; // Achei melhor alterar após gravar dentro do array do que antes de chamar a função
     printf("Conta inserida com sucesso!\n");
 }
 
@@ -253,7 +260,7 @@ void saldoGeral(Conta* contas, int totalContas) {
 }
 
 int main() {
-    Conta contas[MAX_CONTAS];
+    Conta contas[MAX_CONTAS]; // defino o array contas com o struct Conta com o máximo de 100 posições
     int totalContas = 0;
     int opcao;
 
@@ -276,6 +283,7 @@ int main() {
         switch (opcao) {
             case 1:
                 inserir(contas, &totalContas);
+                // coloquei pra inserir o total de contas no final da função
                 break;
             case 2:
                 alterar(contas, totalContas);
